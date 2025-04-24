@@ -52,3 +52,31 @@ CREATE TABLE product_variation (
     variation VARCHAR(255),
     FOREIGN KEY (product_id) REFERENCES product(id)
 );
+CREATE TABLE product_image (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    product_id INT,
+    image_url VARCHAR(2083),
+    FOREIGN KEY (product_id) REFERENCES product(id)
+);
+
+CREATE TABLE attribute_category (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(100)
+);
+
+CREATE TABLE attribute_type (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(100),
+    data_type VARCHAR(50),
+    category_id INT,
+    FOREIGN KEY (category_id) REFERENCES attribute_category(id)
+);
+
+CREATE TABLE product_attribute (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    product_id INT,
+    attribute_type_id INT,
+    value TEXT,
+    FOREIGN KEY (product_id) REFERENCES product(id),
+    FOREIGN KEY (attribute_type_id) REFERENCES attribute_type(id)
+);
